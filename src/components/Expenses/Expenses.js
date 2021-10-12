@@ -25,7 +25,6 @@ const Expenses = () => {
   ];
   return (
     <Card className="expenses">
-      <h2>Let's get started!</h2>
       <ExpenseItem
         ttle={expenses[0].title}
         amt={expenses[0].amount}

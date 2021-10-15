@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
+    // we will pass in a prop from NewExpense (the onSaveExpenseData prop) to make 
+    // the function it's set to available here. That's why we need to add props as 
+    // a parameter. See the submitHandler function.
     const [enteredTitle, setEnteredTitle] = useState('');
     // You can have different states. These are independent of each other.
     const [enteredAmount, setEnteredAmount] = useState('');
@@ -88,7 +91,15 @@ const ExpenseForm = () => {
         setEnteredTitle('');
         setEnteredAmount('');
         setEnteredDate('');
-        console.log(expenseData);
+        props.onSaveExpenseData(expenseData);
+        // Here we use the function in NewExpense.js (onSaveExpenseDataHandler) by passing our submitted data as 
+        // an object parameter to onSaveExpenseData prop. 
+        // We can 'execute' the prop here because the value it resolves to is a function. 
+        // This is the trick on how we can pass data upwards, from a child to a parent 
+        // component.
+        // To check out that it works: Start the app and open the inspector. The submitted 
+        // data object is now logged on the console. The log entry says it's from line 12
+        // of NewExpense.js. And the object has an ID (the random value).
     };
     
     return (<form onSubmit={submitHandler}>

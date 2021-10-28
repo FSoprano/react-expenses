@@ -12,6 +12,12 @@ const Expenses = (props) => {
   return (
     <Card className="expenses">
       <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
+      {/* For an isolated function call, we insert curly braces: */}
+      { props.items.map((expense) => (
+        <ExpenseItem title={expense.title} amount={expense.amount} date={expense.date} />
+      ))}
+
+      {/* This here can go:
       <ExpenseItem
         ttle={props.items[0].title}
         amt={props.items[0].amount}
@@ -32,6 +38,7 @@ const Expenses = (props) => {
         amt={props.items[3].amount}
         dte={props.items[3].date}
       ></ExpenseItem>
+      */}
     </Card>
   );
 };

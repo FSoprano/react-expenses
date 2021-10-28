@@ -11,11 +11,12 @@ const NewExpense = (props) => {
     // props: For an explanation, see ExpenseForm.js
     const saveExpenseDataHandler = (enteredExpenseData) => {
         const expenseData = {
-            ...enteredExpenseData, // all values from the object that holds the submitted 
-            // ExpenseForm data.
             id: Math.random().toString(), // this adds an ID. Math.random does not 
             // guarantee uniqueness, but it's sufficient for this task.
-        };
+
+            ...enteredExpenseData, // all values from the object that holds the submitted 
+            // ExpenseForm data.
+                    };
         props.onAddExpense(expenseData); // Same principle as in ExpenseForm.js.
         // we're chaining up here to pass the newly entered submit data further upwards to 
         // App.js. To see that it works: Start app, open the inspector and check 

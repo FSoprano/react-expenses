@@ -1,5 +1,6 @@
-import ExpenseItem from "./ExpenseItem";
+
 import ExpensesFilter from "./ExpensesFilter";
+import ExpensesList from "./ExpensesList";
 import Card from '../UI/Card';
 import "./Expenses.css";
 import { useState } from "react";
@@ -14,17 +15,7 @@ const Expenses = (props) => {
       }
     );
 
-   let expensesContent = <p class="alert">No expense item found.</p>;
 
-   if (filteredExpenses.length > 0) {
-     expensesContent = filteredExpenses.map((expense) => {
-      return <ExpenseItem 
-        key={expense.id} 
-        title={expense.title} 
-        amount={expense.amount} 
-        date={expense.date} />
-      });
-   }
 
     
   return (
@@ -47,8 +38,11 @@ const Expenses = (props) => {
         return <ExpenseItem key={expense.id} title={expense.title} amount={expense.amount} date={expense.date} />
         })} */}
       {/* Which leads us to alternative 2: */}
-      { expensesContent }
-      {/* For the logic, check the part above the return() call. */}
+      
+      {/* For the logic, check the part above the return() call. 
+      This logic can also 
+      be moved to a new component (alternative 3) */}
+      <ExpensesList items={filteredExpenses} />
       {/* This here can go:
       <ExpenseItem
         ttle={props.items[0].title}

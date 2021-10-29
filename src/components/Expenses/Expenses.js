@@ -14,16 +14,41 @@ const Expenses = (props) => {
       }
     );
 
+   let expensesContent = <p class="alert">No expense item found.</p>;
+
+   if (filteredExpenses.length > 0) {
+     expensesContent = filteredExpenses.map((expense) => {
+      return <ExpenseItem 
+        key={expense.id} 
+        title={expense.title} 
+        amount={expense.amount} 
+        date={expense.date} />
+      });
+   }
+
     
   return (
     <Card className="expenses">
       <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
       {/* For an isolated function call, we insert curly braces: */}
-      { filteredExpenses.map((expense) => {
+      {/* Good old terny ternary operator here. if-conditions wouldn't do Max said.
+      And neither would loops: */}
+      {/* filteredExpenses.length === 0 ? <p class="alert">No expense item found.</p> :
+        filteredExpenses.map((expense) => {
         return <ExpenseItem key={expense.id} title={expense.title} amount={expense.amount} date={expense.date} />
         })
-      } 
-
+      */} 
+      {/* Getting rid of the messy code above. Two alternatives: */}
+      {/* Alternative 1: Exploiting the fact that Javascript renders  
+      the second part after the && when the first part returns true.
+      We end up with two code expressions. Still messy though. */}
+      {/* {filteredExpenses.length === 0 && <p class="alert">No expense item found.</p> }
+      { filteredExpenses.length > 0 && filteredExpenses.map((expense) => {
+        return <ExpenseItem key={expense.id} title={expense.title} amount={expense.amount} date={expense.date} />
+        })} */}
+      {/* Which leads us to alternative 2: */}
+      { expensesContent }
+      {/* For the logic, check the part above the return() call. */}
       {/* This here can go:
       <ExpenseItem
         ttle={props.items[0].title}

@@ -58,7 +58,7 @@ const ExpenseItem = (props) => {
         active, it had to be {title} now, 
         the first value in the array returned by the useState call. 
         If props.ttle remains, we will not see the change.*/}
-        <div className="expense-item__price">${props.amt}</div>
+        <div className="expense-item__price">${props.amount}</div>
       </div>
       
       {/* <button onClick={clickHandler}>Change Title</button>

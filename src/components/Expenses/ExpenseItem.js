@@ -49,10 +49,14 @@ const ExpenseItem = (props) => {
   }
   */
   return (
+    /* Because ExpensesList.js returns a <ul>, we wrap the <Card> in 
+        an <li> here */
+  <li>
     <Card className="expense-item">
       <ExpenseDate date={props.date}/>
       
       <div className="expense-item__description">
+        
         <h2>{props.title}</h2> 
         {/* Mind that as long as the 'Change Title' button was still 
         active, it had to be {title} now, 
@@ -68,6 +72,7 @@ const ExpenseItem = (props) => {
       the function would get executed when the JSX code is executed, and not when 
       the button is clicked. That would be too early*/}
     </Card>
+    </li>
   );
 };
 

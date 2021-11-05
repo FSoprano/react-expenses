@@ -11,6 +11,7 @@ const ExpenseForm = (props) => {
     // be a number as a string. That's why all these states are initialized with an 
     // empty string.
     const [enteredDate, setEnteredDate] = useState('');
+    const [formState, setFormState] = useState('');
 
     // An alternative way: use a single state object for all 3 values:
     // const [userInput, setUserInput] = useState({
@@ -100,32 +101,49 @@ const ExpenseForm = (props) => {
         // To check out that it works: Start the app and open the inspector. The submitted 
         // data object is now logged on the console. The log entry says it's from line 12
         // of NewExpense.js. And the object has an ID (the random value).
+        setFormState('');
     };
     
-    return (<form onSubmit={submitHandler}>
-        <div className="new-expense__controls">
-            <div className="new-expense__control">
-                <input type="text" value={enteredTitle} onChange={titleChangeHandler}/>
-                {/* onChange adds event handler 
-                2-way-binding: The value the user entered is set as the value 
-                property of the input element. The submitHandler functions can 
-                then reset the values to an empty string, so that all 
-                input fields are cleared. */}
-                <label>Title</label>
+
+    const formStateHandler = () => {
+        //event.preventDefault();
+        setFormState(prevShowForm => !prevShowForm);
+    }
+
+    if (formState === '') {
+        return (
+        
+            <div className="new-expense__controls">
+            <div className="new-expense__actions">
+                <button onClick={formStateHandler}>Add New Expense</button>
             </div>
-            <div className="new-expense__control">
-                <input value={enteredAmount} onChange={amountChangeHandler} type="number" min="0.01" step="0.01"/>
-                <label>Amount</label>
             </div>
-            <div className="new-expense__control">
-                <input value={enteredDate} onChange={dateChangeHandler} type="date" min="2021-10-11" max="2023-12-31"/>
-                {/* Gives us a date picker */}
-                <label>Date</label>
-            </div>
-        </div>
-        <div className="new-expense__actions">
-            <button type="submit">Add Expense</button>
-        </div>
-    </form>);
+            );
+    }
+            return (<form onSubmit={submitHandler}>
+                <div className="new-expense__controls">
+                    <div className="new-expense__control">
+                        <input type="text" value={enteredTitle} onChange={titleChangeHandler}/>
+                        {/* onChange adds event handler 
+                        2-way-binding: The value the user entered is set as the value 
+                        property of the input element. The submitHandler functions can 
+                        then reset the values to an empty string, so that all 
+                        input fields are cleared. */}
+                        <label>Title</label>
+                    </div>
+                    <div className="new-expense__control">
+                        <input value={enteredAmount} onChange={amountChangeHandler} type="number" min="0.01" step="0.01"/>
+                        <label>Amount</label>
+                    </div>
+                    <div className="new-expense__control">
+                        <input value={enteredDate} onChange={dateChangeHandler} type="date" min="2021-10-11" max="2023-12-31"/>
+                        {/* Type "date" gives us a date picker */}
+                        <label>Date</label>
+                    </div>
+                </div>
+                <div className="new-expense__actions">
+                <button onClick={formStateHandler}>Cancel</button>&nbsp;&nbsp;<button type="submit">Add Expense</button>
+                </div>
+            </form>);
 };
 export default ExpenseForm;

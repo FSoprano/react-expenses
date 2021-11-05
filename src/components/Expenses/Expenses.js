@@ -1,6 +1,7 @@
 
 import ExpensesFilter from "./ExpensesFilter";
 import ExpensesList from "./ExpensesList";
+import ExpensesChart from "./ExpensesChart";
 import Card from '../UI/Card';
 import "./Expenses.css";
 import { useState } from "react";
@@ -42,28 +43,9 @@ const Expenses = (props) => {
       {/* For the logic, check the part above the return() call. 
       This logic can also 
       be moved to a new component (alternative 3) */}
+      <ExpensesChart expenses={filteredExpenses} />
       <ExpensesList items={filteredExpenses} />
-      {/* This here can go:
-      <ExpenseItem
-        ttle={props.items[0].title}
-        amt={props.items[0].amount}
-        dte={props.items[0].date}
-      ></ExpenseItem>
-      <ExpenseItem
-        ttle={props.items[1].title}
-        amt={props.items[1].amount}
-        dte={props.items[1].date}
-      ></ExpenseItem>
-      <ExpenseItem
-        ttle={props.items[2].title}
-        amt={props.items[2].amount}
-        dte={props.items[2].date}
-      ></ExpenseItem>
-      <ExpenseItem
-        ttle={props.items[3].title}
-        amt={props.items[3].amount}
-        dte={props.items[3].date}
-      ></ExpenseItem>
+      {/* 
       */}
     </Card>
   );
